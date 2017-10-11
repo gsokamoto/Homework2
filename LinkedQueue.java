@@ -2,7 +2,7 @@ public class LinkedQueue<T> implements QueueInterface<T>{
 
 	public LinkedQueue()
 	{
-		front = null;
+		free = null;
 		back = null;
 	}
 	
@@ -12,17 +12,17 @@ public class LinkedQueue<T> implements QueueInterface<T>{
 		private Node next;
 	}
 	
-	private Node front;
+	private Node free;
 	private Node back;
 	
 	public void enqueue(T newEntry) 
 	{
 		Node node = new Node();
 		node.entry = newEntry;
-		if(front == null)
+		if(free == null)
 		{
-			node.next = front;
-			front = back = node;
+			node.next = free;
+			free = back = node;
 		}
 		else
 		{
@@ -36,14 +36,14 @@ public class LinkedQueue<T> implements QueueInterface<T>{
 		T entry = null;
 		try
 		{
-			entry = front.entry;      
-			if (front == null)
+			entry = free.entry;      
+			if (free == null)
 			{
 				back = null;
 			}
 			else
 			{
-				front = front.next;
+				free = free.next;
 			}
 		} catch(EmptyQueueException e) {
 			System.out.println("Error. Stack is empty.");
@@ -55,7 +55,7 @@ public class LinkedQueue<T> implements QueueInterface<T>{
 	{
 		T entry = null;
 		try{
-		entry = front.entry;
+		entry = free.entry;
 		} catch(EmptyQueueException e) {
 			System.out.println("Error. Stack is empty.");
 		}
@@ -64,7 +64,7 @@ public class LinkedQueue<T> implements QueueInterface<T>{
 
 	public boolean isEmpty() 
 	{
-		if(front == null)
+		if(free == null)
 		{
 			return true;
 		}
@@ -76,7 +76,7 @@ public class LinkedQueue<T> implements QueueInterface<T>{
 
 	public void clear() 
 	{
-		front = null;
+		free = null;
 		back = null;
 	}
 
